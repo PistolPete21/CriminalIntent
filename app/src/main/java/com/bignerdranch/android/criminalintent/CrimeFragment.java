@@ -52,7 +52,6 @@ public class CrimeFragment extends Fragment{
 
         mDateButton = (Button)v.findViewById(R.id.crime_date);
         //Challenge Problem
-        mDateButton.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mCrime.getDate()));
         mDateButton.setEnabled(false);
 
         mSolvedCheckBox = (CheckBox)v.findViewById(R.id.crime_solved);
