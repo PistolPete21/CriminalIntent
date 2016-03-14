@@ -37,4 +37,5 @@
               android:layout_marginRight="16dp"
               android:text="@string/crime_solved_label"/>
 
+
 </LinearLayout>
