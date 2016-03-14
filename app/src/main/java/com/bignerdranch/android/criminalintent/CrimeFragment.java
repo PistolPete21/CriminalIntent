@@ -110,7 +110,7 @@ public class CrimeFragment extends Fragment{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         //Challenge 1**
-        
+        inflater.inflate(R.menu.fragment_crime_list_challenge, menu);
 
     }
 
@@ -127,7 +127,33 @@ public class CrimeFragment extends Fragment{
     }
 
     //Challenge 1**
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.challenge_delete:
+                //Extra Credit**
+                if (mCrime != null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Deletion Alert");
+                    builder.setMessage("Do you really want to delete this?");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getActivity(), "Crime Deleted!", Toast.LENGTH_SHORT).show();
+                            CrimeLab.get(getActivity()).deleteCrime(mCrime);
+                            getActivity().finish();
+                            }
+                        });
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            }
+                        });
+                    builder.show();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
 

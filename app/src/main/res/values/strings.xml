@@ -11,7 +11,7 @@
     <string name="hide_subtitle">Hide Subtitle</string>
     <string name="delete_crime">Delete crime</string>
     <string name="empty_text_view">There are no crimes</string>
-    <string name="initial_crime">Initial crime</string>
+    <string name="initial_crime">New Crime</string>
 
     <plurals name="subtitle_plural">
         <item quantity="one">%1$s crime</item>

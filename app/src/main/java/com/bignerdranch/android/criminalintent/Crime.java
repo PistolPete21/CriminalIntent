@@ -24,7 +24,7 @@ public class Crime {
         return mTitle;
     }
 
-    public UUID getID() {
+    public UUID getId() {
         return mID;
     }
     public Date getDate() {
