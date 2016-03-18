@@ -41,9 +41,12 @@ public class CrimeLab {
         mDatabase.insert(CrimeTable.NAME, null, values);
     }
 
-    //Challenge 1**
-    public void deleteCrime(Crime c) {
-        mCrimes.remove(c);
+    //Challenge : Deleting Crimes
+    public void deleteCrime(Crime crime) {
+        String uuidString = crime.getId().toString();
+
+        mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ?", new String[]{uuidString});
+
     }
 
     public List<Crime> getCrimes() {
