@@ -37,7 +37,7 @@
               android:layout_marginRight="16dp"
               android:text="@string/crime_solved_label"/>
 
-    <Button android:id="@+id/crime_suspect"
+    <Button android:id = "@+id/crime_suspect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
@@ -45,7 +45,7 @@
             android:layout_marginRight="16dp"
             android:text="@string/crime_suspect_text"/>
 
-    <Button android:id="@+id/crime_report"
+    <Button android:id = "@+id/crime_report"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"

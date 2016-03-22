@@ -21,6 +21,7 @@ public class Crime {
         mID = id;
         mDate = new Date();
     }
+
     public void setTitle(String title) {
         mTitle = title;
     }

@@ -3,6 +3,7 @@ package com.bignerdranch.android.criminalintent;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -42,6 +43,7 @@ public class CrimeFragment extends Fragment{
 
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_CONTACT = 1;
+    private static final int REQUEST_PHONE = 2;
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -50,6 +52,7 @@ public class CrimeFragment extends Fragment{
     private AlertDialog mDialog;
     private Button mReportButton;
     private Button mSuspectButton;
+    private Button mCallSuspectButton;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -140,6 +143,15 @@ public class CrimeFragment extends Fragment{
             }
         });
 
+        final Intent pickNewContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+
+        mCallSuspectButton = (Button) v.findViewById(R.id.call_suspect);
+        mCallSuspectButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivityForResult(pickNewContact, REQUEST_PHONE);
+            }
+        });
+
         if (mCrime.getSuspect() != null) {
             mSuspectButton.setText(mCrime.getSuspect());
         }
@@ -154,10 +166,21 @@ public class CrimeFragment extends Fragment{
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        //Challenge 1**
         inflater.inflate(R.menu.fragment_crime_list_challenge, menu);
 
     }
+
+    public Cursor queryContacts(Uri uri, String[] fields, String whereClause, String[] args) {
+        Cursor c = getActivity().getContentResolver().query(uri, fields, whereClause, args, null);
+        if (c.getCount() == 0) {
+            c.close();
+            return null;
+        }
+
+        c.moveToFirst();
+        return c;
+    }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {
@@ -165,10 +188,10 @@ public class CrimeFragment extends Fragment{
         }
 
         if (requestCode == REQUEST_DATE) {
-            Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            Date date = (Date) data
+                    .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
-
         } else if (requestCode == REQUEST_CONTACT && data != null) {
             Uri contactUri = data.getData();
             // Specify which fields you want your query to return
@@ -178,7 +201,9 @@ public class CrimeFragment extends Fragment{
             };
             // Perform your query - the contactUri is like a "where"
             // clause here
-            Cursor c = getActivity().getContentResolver().query(contactUri, queryFields, null, null, null);
+            ContentResolver resolver = getActivity().getContentResolver();
+            Cursor c = resolver
+                    .query(contactUri, queryFields, null, null, null);
 
             try {
                 // Double-check that you actually got results
@@ -199,11 +224,10 @@ public class CrimeFragment extends Fragment{
         }
     }
 
-    //Challenge 1**
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.challenge_delete:
-                //Extra Credit**
                 if (mCrime != null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("Deletion Alert");

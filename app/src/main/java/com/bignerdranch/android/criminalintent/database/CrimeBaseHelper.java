@@ -4,13 +4,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.bignerdranch.android.criminalintent.Crime;
 import com.bignerdranch.android.criminalintent.database.CrimeDbSchema.CrimeTable;
 
 /**
  * Created by peterschwartz on 3/14/16.
  */
 public class CrimeBaseHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 1;
+    private static final String TAG = "CrimeBaseHelper";
+    private static final int VERSION = 2;
     private static final String DATABASE_NAME = "crimeBase.db";
 
     public CrimeBaseHelper(Context context) {
@@ -25,8 +27,8 @@ public class CrimeBaseHelper extends SQLiteOpenHelper {
                         CrimeTable.Cols.UUID + ", " +
                         CrimeTable.Cols.TITLE + ", " +
                         CrimeTable.Cols.DATE + ", " +
-                        CrimeTable.Cols.SOLVED + ", " +
-                        CrimeTable.Cols.SUSPECT + ", "
+                        CrimeTable.Cols.SUSPECT + ", " +
+                        CrimeTable.Cols.SOLVED + ") "
         );
     }
 
