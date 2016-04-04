@@ -12,7 +12,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
@@ -39,7 +38,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -66,7 +64,6 @@ public class CrimeFragment extends Fragment{
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private File mPhotoFile;
-    private Point mPhotoViewSize;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
