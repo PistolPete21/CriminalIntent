@@ -3,10 +3,7 @@ package com.bignerdranch.android.criminalintent;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.Point;
-import android.media.ExifInterface;
-import android.widget.ImageView;
 
 import java.io.IOException;
 
@@ -16,8 +13,7 @@ import java.io.IOException;
 public class PictureUtils {
     public static Bitmap getScaledBitmap(String path, Activity activity) {
         Point size = new Point();
-        activity.getWindowManager().getDefaultDisplay()
-                .getSize(size);
+        activity.getWindowManager().getDefaultDisplay().getSize(size);
 
         return getScaledBitmap(path, size.x, size.y);
     }
